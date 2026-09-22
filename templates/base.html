@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<!-- Theme Toggle Button -->
+<div class="theme-toggle-container">
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+</div>
+<aside class="sidenav" id="sidenav" aria-hidden="false">
+    <div class="sidenav-top">
+        <div class="logo">🌍 AI Travel</div>
+        <button id="sidebarToggle" class="sidenav-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
+    <nav class="sidenav-nav">
+        <a href="{% url 'dashboard:index' %}" class="active">🏠 Home</a>
+        <a href="{% url 'dashboard:index' %}">🧭 Plan Trip</a>
+        {% if user.is_authenticated %}
+            
+            <a class="logout-link" href="{% url 'accounts:logout' %}">🔒 Logout</a>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">🔑 Login</a>
+            <a href="{% url 'accounts:register' %}">✍️ Register</a>
+        {% endif %}
+    </nav>
+    <!-- Saved trips (moved into sidebar for quick access) -->
+    <div class="saved-trips">
+        <h4>📌 Saved Trips</h4>
+        {% if trips %}
+            <div class="saved-list">
+                {% for trip in trips|slice:":6" %}
+                    <a class="saved-item" href="#" data-id="{{ trip.id }}" data-city="{{ trip.city }}" data-budget="{{ trip.budget|escapejs }}" data-itinerary="{{ trip.itinerary|escapejs }}"> 
+                        <div class="saved-title">{{ trip.city }}</div>
+                        <div class="saved-meta">{{ trip.itinerary|striptags|truncatechars:100 }}</div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">No saved trips yet</p>
+        {% endif %}
+    </div>
+    <div class="sidenav-footer">Made with ❤️</div>
+</aside>
+
+<!-- Main content area (pushes right when sidenav visible) -->
+<main class="main-content container">
+    {% block content %}{% endblock %}
+</main>
+<!-- Saved Trip Modal -->
+<div id="tripModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div class="modal-body">
+            <h3 id="modalTitle">Trip</h3>
+            <div class="modal-meta" id="modalMeta"></div>
+            <div class="modal-content" id="modalContent"></div>
+            <div class="modal-actions" style="margin-top:14px; display:flex; gap:8px; justify-content:flex-end;">
+                <button id="downloadPDFBtn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">📄 Download PDF</button>
+                <button id="deleteTripBtn" class="btn danger">Delete</button>
+                <button class="one1" id="modalCloseFooter" class="btn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- render csrf token once so browser receives csrftoken cookie for AJAX posts -->
+<form style="display:none">{% csrf_token %}</form>
+
+<!-- SweetAlert2 for nicer alerts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Theme Toggle Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            htmlElement.classList.add('light-mode');
+            themeToggle.textContent = '☀️';
+        }
+        
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', function() {
+            htmlElement.classList.toggle('light-mode');
+            const isLightMode = htmlElement.classList.contains('light-mode');
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+            
+            // Update button icon
+            themeToggle.textContent = isLightMode ? '☀️' : '🌙';
+            
+            // Show feedback
+            if (window.Swal) {
+                Swal.fire({
+                    icon: 'info',
+                    title: isLightMode ? 'Light Mode' : 'Dark Mode',
+                    text: isLightMode ? 'Switched to light mode' : 'Switched to dark mode',
+                    timer: 1200,
+                    timerProgressBar: true,
+                    position: 'top-end',
+                    toast: true,
+                    showConfirmButton: false
+                });
+            }
+        });
+    });
+</script>
+
+<script src="{% static 'js/app.js' %}"></script>
+<footer class="site-footer">
+    <div class="left">Multi Agent — built by TeamRam</div>
+    <div class="right">telegram : Projects897</div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="search-section">
+    <div class="search-inputs">
+        <h1>✨ Plan Your Trip</h1>
+        
+        <div class="input-row">
+            <input id="city" placeholder="Enter destination">
+            <input id="budget" placeholder="Enter budget">
+        </div>
+
+        <div class="input-row">
+            <input id="people" placeholder="People (e.g. 2)">
+            <input id="days" placeholder="Days (e.g. 3)">
+        </div>
+
+        <button onclick="generate()">🚀 Generate Plan</button>
+    </div>
+    
+    <div class="agent-logo">
+        <img src="{% static 'images/ai-agents-bg.jpg' %}" alt="AI Agent Logo" />
+    </div>
+</div>
+
+<div id="result"></div>
+
+{% endblock %}
