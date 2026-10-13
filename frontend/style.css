@@ -1,0 +1,384 @@
+```css
+/* =========================================
+   TravelMate - Main Styles
+   ========================================= */
+
+
+/* ---------- General ---------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
+}
+
+
+/* ---------- Header ---------- */
+
+.header {
+    background-color: #0b5ed7;
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 8%;
+}
+
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.header nav {
+    display: flex;
+    gap: 25px;
+}
+
+
+.header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.header nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------- Hero Section ---------- */
+
+.hero {
+    background: linear-gradient(135deg,
+            #0b5ed7,
+            #20c997);
+
+    color: white;
+
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 30px;
+}
+
+
+/* ---------- Search ---------- */
+
+.search-box {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    max-width: 650px;
+
+    margin: auto;
+}
+
+
+.search-box input {
+    flex: 1;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.search-box button {
+    padding: 15px 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #ff9800;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.search-box button:hover {
+    background-color: #e68900;
+}
+
+
+/* ---------- Search Result ---------- */
+
+#result {
+    max-width: 700px;
+
+    margin: 25px auto 0;
+}
+
+
+/* ---------- Popular Destinations ---------- */
+
+.popular {
+    padding: 60px 8%;
+
+    text-align: center;
+}
+
+
+.popular h2 {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+
+.popular>p {
+    color: #666;
+
+    margin-bottom: 35px;
+}
+
+
+/* ---------- Destination Container ---------- */
+
+.destinations-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 25px;
+
+    text-align: left;
+}
+
+
+/* ---------- Destination Card ---------- */
+
+.destination-card {
+    background-color: white;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.10);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.destination-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+.destination-card h1,
+.destination-card h2 {
+    color: #0b5ed7;
+
+    margin-bottom: 12px;
+}
+
+
+.destination-card p {
+    margin-bottom: 10px;
+
+    color: #555;
+}
+
+
+/* ---------- Buttons ---------- */
+
+.destination-card button {
+    border: none;
+
+    background-color: #0b5ed7;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    margin-top: 10px;
+}
+
+
+.destination-card button:hover {
+    background-color: #084298;
+}
+
+
+/* ---------- Destination Details ---------- */
+
+.destination-container {
+    max-width: 900px;
+
+    margin: 50px auto;
+
+    padding: 20px;
+}
+
+
+.destination-info {
+    margin-top: 20px;
+}
+
+
+.destination-info p {
+    margin-bottom: 8px;
+}
+
+
+.description {
+    font-size: 18px;
+}
+
+
+/* ---------- Future Features ---------- */
+
+.future-features {
+    margin-top: 30px;
+}
+
+
+.future-features ul {
+    list-style: none;
+
+    padding: 0;
+}
+
+
+.future-features li {
+    background-color: #f1f4f8;
+
+    padding: 12px;
+
+    margin: 8px 0;
+
+    border-radius: 6px;
+}
+
+
+/* ---------- Back Button ---------- */
+
+.back-button {
+    border: none;
+
+    background-color: #555;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.back-button:hover {
+    background-color: #333;
+}
+
+
+/* ---------- Footer ---------- */
+
+footer {
+    background-color: #222;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 50px;
+}
+
+
+footer p {
+    margin: 0;
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 600px) {
+
+    .header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+
+    .search-box {
+        flex-direction: column;
+    }
+
+
+    .search-box input,
+    .search-box button {
+        width: 100%;
+    }
+
+
+    .popular {
+        padding: 40px 20px;
+    }
+
+}
+
+```

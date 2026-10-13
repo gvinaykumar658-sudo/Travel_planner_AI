@@ -1,0 +1,182 @@
+```javascript
+/* ==========================================
+   DESTINATION DETAILS
+   STAGE 1 FRONTEND DATA
+========================================== */
+
+
+const destinationData = [
+
+    {
+        id: 1,
+        name: "Hyderabad",
+        state: "Telangana",
+        district: "Hyderabad",
+        description:
+            "Hyderabad is a vibrant city known for its rich history, famous cuisine, heritage architecture and modern technology industry.",
+        emoji: "🏙️"
+    },
+
+    {
+        id: 2,
+        name: "Srisailam",
+        state: "Andhra Pradesh",
+        district: "Nandyal",
+        description:
+            "Srisailam is a beautiful destination surrounded by hills and forests, known for its spiritual significance and natural scenery.",
+        emoji: "🛕"
+    },
+
+    {
+        id: 3,
+        name: "Tirupati",
+        state: "Andhra Pradesh",
+        district: "Tirupati",
+        description:
+            "Tirupati is a famous pilgrimage destination and an important cultural center in southern India.",
+        emoji: "🛕"
+    },
+
+    {
+        id: 4,
+        name: "Araku Valley",
+        state: "Andhra Pradesh",
+        district: "Alluri Sitharama Raju",
+        description:
+            "Araku Valley is a scenic hill destination known for beautiful landscapes, valleys, forests and waterfalls.",
+        emoji: "🏔️"
+    },
+
+    {
+        id: 5,
+        name: "Visakhapatnam",
+        state: "Andhra Pradesh",
+        district: "Visakhapatnam",
+        description:
+            "Visakhapatnam is a coastal destination known for beaches, hills, viewpoints and its beautiful seaside environment.",
+        emoji: "🏖️"
+    },
+
+    {
+        id: 6,
+        name: "Warangal",
+        state: "Telangana",
+        district: "Warangal",
+        description:
+            "Warangal is a historic destination known for forts, temples, architecture and cultural heritage.",
+        emoji: "🏛️"
+    }
+
+];
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const id =
+    Number(params.get("id"));
+
+
+const name =
+    params.get("name");
+
+
+let destination;
+
+
+if (id) {
+
+    destination =
+        destinationData.find(
+            function(place) {
+
+                return place.id === id;
+
+            }
+        );
+
+} else if (name) {
+
+    destination =
+        destinationData.find(
+            function(place) {
+
+                return place.name
+                    .toLowerCase() ===
+                    name.toLowerCase();
+
+            }
+        );
+
+}
+
+
+if (!destination) {
+
+    destination =
+        destinationData[0];
+
+}
+
+
+document.getElementById(
+    "detailName"
+).textContent =
+    destination.name;
+
+
+document.getElementById(
+    "detailHeading"
+).textContent =
+    "Explore " + destination.name;
+
+
+document.getElementById(
+    "detailState"
+).textContent =
+    destination.state;
+
+
+document.getElementById(
+    "detailDescription"
+).textContent =
+    destination.description;
+
+
+document.getElementById(
+    "detailLocation"
+).textContent =
+    destination.district +
+    ", " +
+    destination.state;
+
+
+document.getElementById(
+    "infoState"
+).textContent =
+    destination.state;
+
+
+document.getElementById(
+    "infoDistrict"
+).textContent =
+    destination.district;
+
+
+document.getElementById(
+    "detailImage"
+).textContent =
+    destination.emoji;
+
+
+function showInterestMessage() {
+
+    alert(
+        "Interest feature will be connected to the TravelMate backend in Stage 5."
+    );
+
+}
+```
