@@ -1,35 +1,35 @@
-# Operating System Files
-.DS_Store
-Thumbs.db
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Node / Frontend
-node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/dist-ssr/
-*.local
-
-# Java / Maven / Backend
-backend/target/
+# Java / Spring Boot / Maven
+target/
+**/target/
 *.class
-*.jar
-*.war
-*.ear
 
-# IDE and Editor
+# Node.js / React / Vite
+node_modules/
+**/node_modules/
+frontend/dist/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+application-local.properties
+
+# Logs and local databases
+*.log
+*.mv.db
+*.trace.db
+
+# IDE and operating system
 .idea/
 *.iml
 .vscode/
-.settings/
-.project
-.classpath
-
-# Environment Secrets
-.env
-*.env.local
+.DS_Store
+Thumbs.db

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-card" style="background: linear-gradient(135deg, #0f1724 0%, #1a2744 100%); color: #ffffff; padding: 32px 28px; max-width: 340px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(124,58,237,0.2); margin: 40px auto;">
+    <h2 style="margin: 0 0 24px 0; font-size: 1.6rem; font-weight: 700; color: #fbbf24; text-align: center; border-bottom: 2px solid #7c3aed; padding-bottom: 12px;">Login</h2>
+
+    <form method="POST" style="display: flex; flex-direction: column; gap: 18px; padding-top: 6px;">
+        {% csrf_token %}
+        {% if error %}
+            <div id="serverError" data-text="{{ error }}"></div>
+        {% endif %}
+        <input name="username" placeholder="Username" style="padding: 10px 0; font-size: 0.9rem; border: none; border-bottom: 2px solid rgba(255,255,255,0.3); background: transparent; color: #ffffff; border-radius: 0; font-weight: 500; transition: border-color 0.3s ease;">
+        <input name="password" type="password" placeholder="Password" style="padding: 10px 0; font-size: 0.9rem; border: none; border-bottom: 2px solid rgba(255,255,255,0.3); background: transparent; color: #ffffff; border-radius: 0; font-weight: 500; transition: border-color 0.3s ease;">
+        <button type="submit" style="padding: 11px 16px; font-size: 0.9rem; margin-top: 12px; border: none; border-radius: 6px; background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%); color: #ffffff; cursor: pointer; font-weight: 700; box-shadow: 0 4px 14px rgba(124,58,237,0.3); transition: all 0.3s ease;">Login</button>
+    </form>
+</div>
+
+{% if error %}
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        if (window.Swal) Swal.fire({icon:'error', title:'Login failed', text: document.getElementById('serverError').dataset.text});
+        else alert(document.getElementById('serverError').dataset.text);
+    });
+</script>
+{% else %}
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(){
+                setTimeout(() => {
+                    if (window.Swal) Swal.fire({icon:'success', title:'Welcome!', text:'Login successful. Redirecting...', timer:1500, timerProgressBar:true});
+                }, 100);
+            });
+        }
+    });
+</script>
+{% endif %}
+
+{% endblock %}
