@@ -1,61 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
-import Login from './pages/Login.jsx'
-import Register from './pages/Register.jsx'
-import Browse from './pages/Browse.jsx'
-import MyTrips from './pages/MyTrips.jsx'
-import VendorDashboard from './pages/VendorDashboard.jsx'
-import AdminDashboard from './pages/AdminDashboard.jsx'
 import FloatingContact from './components/FloatingContact.jsx'
 import { OWNER_INFO } from './data/fleetData'
 
 export default function App() {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const raw = localStorage.getItem('tm_user')
-    if (raw) {
-      try {
-        setUser(JSON.parse(raw))
-      } catch (e) {
-        localStorage.removeItem('tm_user')
-      }
-    }
-  }, [])
-
-  const login = (u, token) => {
-    localStorage.setItem('tm_user', JSON.stringify(u))
-    localStorage.setItem('tm_token', token)
-    setUser(u)
-  }
-
-  const logout = () => {
-    localStorage.removeItem('tm_user')
-    localStorage.removeItem('tm_token')
-    setUser(null)
-  }
-
   return (
     <>
-      <Navbar user={user} onLogout={logout} />
+      <Navbar />
       
       <main className="main-content">
         <Routes>
           {/* Public Home: Feature-rich fleet showcase and booking portal */}
           <Route path="/" element={<Home />} />
-          <Route path="/browse" element={<Browse />} />
+          <Route path="/browse" element={<Home />} />
+          <Route path="/fleet" element={<Home />} />
           
-          {/* Authentication */}
-          <Route path="/login" element={user ? <Navigate to={user.role === 'VENDOR' ? '/vendor' : user.role === 'ADMIN' ? '/admin' : '/trips'} /> : <Login onLogin={login} />} />
-          <Route path="/register" element={user ? <Navigate to="/" /> : <Register onLogin={login} />} />
-          
-          {/* Protected Customer & Vendor Portals */}
-          <Route path="/trips" element={user ? <MyTrips user={user} /> : <Navigate to="/login" />} />
-          <Route path="/vendor" element={user?.role === 'VENDOR' ? <VendorDashboard user={user} /> : <Navigate to="/login" />} />
-          <Route path="/admin" element={user?.role === 'ADMIN' ? <AdminDashboard /> : <Navigate to="/login" />} />
-
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
@@ -81,13 +42,13 @@ export default function App() {
               <li><Link to="/">Home Showroom</Link></li>
               <li><a href="/#all-vehicles">All Cars & Fleet</a></li>
               <li><a href="/#tour-packages">Popular Tour Packages</a></li>
-              <li><Link to="/login">Vendor / Admin Sign In</Link></li>
-              <li><Link to="/register">Create Account</Link></li>
+              <li><a href="/#booking-form-section">Instant Booking Form</a></li>
+              <li><a href="/#contact">Contact & Location</a></li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Popular Yatras</h4>
+            <h4>Popular Temple Yatras</h4>
             <ul className="footer-links">
               <li><a href="/#tour-packages">Hyderabad to Srisailam</a></li>
               <li><a href="/#tour-packages">Hyderabad to Tirupati</a></li>
