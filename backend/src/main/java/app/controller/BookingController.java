@@ -34,6 +34,16 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
+    @PostMapping("/public")
+    public ResponseEntity<?> createPublicEnquiry(@RequestBody java.util.Map<String, Object> req) {
+        java.util.Map<String, Object> resp = new java.util.HashMap<>();
+        resp.put("status", "SUCCESS");
+        resp.put("message", "Booking enquiry received successfully. Car owner Mr. Mudhunuri Surender Reddy will contact you shortly.");
+        resp.put("ownerPhone", "9848587868");
+        resp.put("ownerEmail", "surenderreddym49@gmail.com");
+        return ResponseEntity.ok(resp);
+    }
+
     @GetMapping
     public ResponseEntity<?> getBookings(
             @AuthenticationPrincipal UserPrincipal principal,
